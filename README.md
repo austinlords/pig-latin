@@ -34,35 +34,61 @@ When you get to consonants, don't try to solve it all at once. Instead, start wi
 Although you're welcome to solve the problem however you'd like, there are a few methods that would be handy:
 
 String.prototype.slice()
+
 String.prototype.includes()
+
 String.prototype.indexOf()
+
 Take a look at this and other documentation to gather the tools you'll need before you try to fulfill your specs.
 
 ## Specs
 
 The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels.
+
 Example Input: 3
+
 Example Output: 3
+
 The program adds "way" to single-letter words beginning with a vowel.
+
 Example Input: i
+
 Example Output: iway
+
 The program adds "way" to single-letter words beginning with a vowel, regardless of capitalization.
+
 Example Input: I
+
 Example Output: Iway
+
 The program adds "way" to the end of words that begin with a vowel, regardless of capitalization.
+
 Example Input: English
+
 Example Output: Englishway
+
 If word begins with a consonant, move the consonant to the end and add "ay".
+
 Example Input: Start
+
 Example Output: tartSay
+
 Move all consecutive consonants at the beginning of the word to the end and add "ay". 
+
 Example Input: Start
+
 Example Output: artStay
+
 Move all consecutive consonants at the beginning of the word to the end and add "ay", including qu & y. 
+
 Example Input: Squeal
+
 Example Output: ealSquay
+
 Program can identify separate words of input
+
 Example Input: heaven pig earth
+
 Example Output: [heaven, pig, earth]
 
 
