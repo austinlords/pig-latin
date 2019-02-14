@@ -2,6 +2,7 @@
 var nonLetter = /[^A-Za-z]/;
 var vowel = /[aeiou]/i;
 var consonant = /[bcdfghjklmnpqrstvwxyz]/i;
+var q = /[qQ]/;
 
 var translate = function(input) {
   if (vowel.test(input[0])) {
@@ -9,10 +10,16 @@ var translate = function(input) {
     return input;
   } else if (consonant.test(input[0])) {
     var inputArray = input.split("");
-    alert(inputArray);
-    removedCharacter = inputArray.shift();
-    alert(removedCharacter);
-    newString = inputArray.join("") + removedCharacter + "ay";
+    var removedCharacters = "";
+    while (consonant.test(inputArray[0])) {
+      removedCharacters += inputArray.shift();
+      if ((q.test(removedCharacters)) && (inputArray[0] === "u")) {
+        removedCharacters += inputArray.shift();
+        newString = inputArray.join("") + removedCharacters + "ay";
+        return newString;
+      }
+    }
+    newString = inputArray.join("") + removedCharacters + "ay";
     return newString;
   } else {
     return false;
