@@ -5,25 +5,29 @@ var consonant = /[bcdfghjklmnpqrstvwxyz]/i;
 var q = /[qQ]/;
 
 var translate = function(input) {
-  if (vowel.test(input[0])) {
-    input = input + "way";
-    return input;
-  } else if (consonant.test(input[0])) {
-    var inputArray = input.split("");
-    var removedCharacters = "";
-    while (consonant.test(inputArray[0])) {
-      removedCharacters += inputArray.shift();
-      if ((q.test(removedCharacters)) && (inputArray[0] === "u")) {
-        removedCharacters += inputArray.shift();
-        newString = inputArray.join("") + removedCharacters + "ay";
-        return newString;
+  var pigLatinResult = "";
+  var wordsArray = input.split(" ");
+  wordsArray.forEach(function(word) {
+    if (vowel.test(word[0])) {
+      word += "way";
+      pigLatinResult += word + " ";
+    } else if (consonant.test(word[0])) {
+      var consonantWordArray = word.split("");
+      var removedCharacters = "";
+      while (consonant.test(consonantWordArray[0])) {
+        removedCharacters += consonantWordArray.shift();
+        if ((q.test(removedCharacters)) && (consonantWordArray[0] === "u")) {
+          removedCharacters += consonantWordArray.shift();
+          newString = consonantWordArray.join("") + removedCharacters + "ay";
+        }
       }
+      newString = consonantWordArray.join("") + removedCharacters + "ay";
+      pigLatinResult += newString + " ";
+    } else {
+      return false;
     }
-    newString = inputArray.join("") + removedCharacters + "ay";
-    return newString;
-  } else {
-    return false;
-  }
+  });
+  return pigLatinResult;
 }
 
 // front-end (user interface) logic
@@ -32,6 +36,7 @@ $(function() {
     event.preventDefault();
     var userInput = $("#userInput").val();
     var pigLatin = translate(userInput);
-    alert(pigLatin);
+    $("#pigLatin").text(pigLatin);
+    $("#result").show();
   }); // end of submit function
 }); //end of front end
